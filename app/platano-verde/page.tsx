@@ -372,13 +372,6 @@ export default function PlatanoVerdePage() {
 
           </div>
 
-          <Link
-            href="/"
-            className="bg-slate-800 hover:bg-slate-700 transition-all text-white px-6 py-3 rounded-xl font-semibold"
-          >
-            ← VOLVER
-          </Link>
-
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
