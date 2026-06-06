@@ -1,13 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Lock, Mail, ShieldCheck } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
-
-  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +12,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   async function handleLogin(e: React.FormEvent) {
+
     e.preventDefault();
 
     setLoading(true);
@@ -27,11 +25,12 @@ export default function LoginPage() {
     setLoading(false);
 
     if (error) {
-      alert("Correo o contraseña incorrectos");
+      alert(error.message);
       return;
     }
 
-    router.push("/dashboard");
+    // REDIRECCIÓN CORREGIDA
+    window.location.href = "/dashboard";
   }
 
   return (
@@ -69,10 +68,11 @@ export default function LoginPage() {
 
               <input
                 type="email"
-                placeholder="admin@empresa.com"
+                placeholder="admin@contenedores.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-transparent outline-none px-3 py-4 text-white"
+                required
               />
             </div>
           </div>
@@ -92,6 +92,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-transparent outline-none px-3 py-4 text-white"
+                required
               />
             </div>
           </div>
@@ -100,7 +101,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 transition-all duration-300 py-4 rounded-2xl text-white font-semibold shadow-xl"
+            className="w-full bg-blue-600 hover:bg-blue-700 transition-all duration-300 py-4 rounded-2xl text-white font-semibold shadow-xl disabled:opacity-50"
           >
             {loading ? "Ingresando..." : "Ingresar"}
           </button>
